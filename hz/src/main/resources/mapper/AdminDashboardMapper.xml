@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.admin.mapper.AdminDashboardMapper">
+
+    <select id="countUsers" resultType="java.lang.Long">
+        select count(*) from user
+    </select>
+
+    <select id="countHelps" resultType="java.lang.Long">
+        select count(*) from help
+    </select>
+
+    <select id="countHoles" resultType="java.lang.Long">
+        select count(*) from hole
+    </select>
+
+    <select id="countLosts" resultType="java.lang.Long">
+        select count(*) from lost
+    </select>
+
+    <select id="countDynamics" resultType="java.lang.Long">
+        select count(*) from dynamic
+    </select>
+
+    <select id="countComments" resultType="java.lang.Long">
+        select count(*) from comment
+    </select>
+
+    <select id="countLikes" resultType="java.lang.Long">
+        select count(*) from likes
+    </select>
+
+    <select id="countCollections" resultType="java.lang.Long">
+        select count(*) from collection
+    </select>
+
+    <select id="selectContentList" resultType="com.study.hz.admin.dto.AdminContentVo">
+        <foreach collection="typeList" item="t" separator=" UNION ALL ">
+            <if test="t == 'help'">
+                select h.id, 'HELP' as type, h.create_user as createUser, ui.nickname,
+                       h.title, h.description, IFNULL(h.comment_count, 0) as commentCount,
+                       IFNULL(h.like_count, 0) as likeCount, h.create_time as createTime
+                from help h
+                left join user_info ui on h.create_user = ui.user_id
+                where 1=1
+                <if test="keyword != null and keyword != ''">
+                    and (h.title like concat('%', #{keyword}, '%') or h.description like concat('%', #{keyword}, '%'))
+                </if>
+            </if>
+            <if test="t == 'hole'">
+                select ho.id, 'HOLE' as type, ho.create_user as createUser, ui.nickname,
+                       null as title, ho.content as description, ho.comment_count as commentCount,
+                       ho.like_count as likeCount, ho.create_time as createTime
+                from hole ho
+                left join user_info ui on ho.create_user = ui.user_id
+                where 1=1
+                <if test="keyword != null and keyword != ''">
+                    and ho.content like concat('%', #{keyword}, '%')
+                </if>
+            </if>
+            <if test="t == 'lost'">
+                select l.id, 'LOST' as type, l.create_user as createUser, ui.nickname,
+                       null as title, l.description, l.comment_count as commentCount,
+                       l.like_count as likeCount, l.create_time as createTime
+                from lost l
+                left join user_info ui on l.create_user = ui.user_id
+                where 1=1
+                <if test="keyword != null and keyword != ''">
+                    and l.description like concat('%', #{keyword}, '%')
+                </if>
+            </if>
+            <if test="t == 'dynamic'">
+                select d.id, 'DYNAMIC' as type, d.create_user as createUser, ui.nickname,
+                       d.title, d.content as description, d.comment_count as commentCount,
+                       d.like_count as likeCount, d.create_time as createTime
+                from dynamic d
+                left join user_info ui on d.create_user = ui.user_id
+                where 1=1
+                <if test="keyword != null and keyword != ''">
+                    and (d.title like concat('%', #{keyword}, '%') or d.content like concat('%', #{keyword}, '%'))
+                </if>
+            </if>
+        </foreach>
+        order by createTime desc
+        limit #{offset}, #{size}
+    </select>
+
+</mapper>

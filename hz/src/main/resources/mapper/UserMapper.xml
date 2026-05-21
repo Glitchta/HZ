@@ -5,11 +5,24 @@
 <mapper namespace="com.study.hz.mapper.UserMapper">
 
     <select id="selectByUsername" parameterType="java.lang.String" resultType="com.study.hz.pojo.User">
-        select id,username,password,openid from user where username = #{username}
+        select id,username,password,openid,role,status from user where username = #{username}
     </select>
 
     <select id="selectByOpenid" parameterType="java.lang.String" resultType="com.study.hz.pojo.User">
-        select id,username,password,openid from user where openid = #{openid}
+        select id,username,password,openid,role,status from user where openid = #{openid}
+    </select>
+
+    <select id="selectUserList" resultType="com.study.hz.admin.dto.AdminUserVo">
+        select u.id, u.username, u.openid, u.role, u.status,
+               ui.nickname, ui.avatar, ui.phone, ui.email, ui.major, ui.gender, ui.sign, ui.birthday
+        from user u
+        left join user_info ui on u.id = ui.user_id
+        where 1=1
+        <if test="keyword != null and keyword != ''">
+            and (u.username like concat('%', #{keyword}, '%') or ui.nickname like concat('%', #{keyword}, '%'))
+        </if>
+        order by u.id desc
+        limit #{offset}, #{size}
     </select>
 
 </mapper>

@@ -78,6 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Long userId = this.selectByUsername(username).getId();
         loginDto.setAccessToken(jwtUtil.generateAccessToken(userId));
         loginDto.setRefreshToken(jwtUtil.generateRefreshToken(userId));
+        loginDto.setRole(originUser.getRole());
 
         return Result.success(loginDto);
     }
@@ -131,6 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         loginDto.setUsername(user.getUsername());
         loginDto.setAccessToken(jwtUtil.generateAccessToken(userId));
         loginDto.setRefreshToken(jwtUtil.generateRefreshToken(userId));
+        loginDto.setRole(user.getRole());
 
         return Result.success(loginDto);
     }

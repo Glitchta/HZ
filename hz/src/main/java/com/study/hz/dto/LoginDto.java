@@ -16,4 +16,5 @@ public class LoginDto {
     private String confirmPassword;
     private String refreshToken;
     private String accessToken;
+    private String role;
 }

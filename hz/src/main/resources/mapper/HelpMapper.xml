@@ -17,18 +17,19 @@
         <result property="contact" column="contact"/>
         <result property="helpType" column="help_type"/>
         <result property="status" column="status"/>
+        <result property="likeCount" column="like_count"/>
         <result property="avatar" column="avatar"/>
         <result property="nickname" column="nickname"/>
     </resultMap>
 
     <select id="selectHelpList" resultMap="HelpResultMap" parameterType="java.lang.Integer">
-        select h.id,h.create_user,h.title,h.description,h.images,h.contact_type,h.contact,h.type,h.help_type,h.status,h.create_time,u.avatar,u.nickname from help h,user_info u
+        select h.id,h.create_user,h.title,h.description,h.images,h.contact_type,h.contact,h.type,h.help_type,h.status,h.like_count,h.create_time,u.avatar,u.nickname from help h,user_info u
         where h.create_user = u.user_id
         limit #{offset},#{size}
     </select>
 
     <select id="selectDetailById" resultMap="HelpResultMap" parameterType="java.lang.Long">
-        select h.id,h.create_user,h.title,h.description,h.images,h.contact_type,h.contact,h.type,h.help_type,h.status,h.create_time,u.avatar,u.nickname from help h,user_info u
+        select h.id,h.create_user,h.title,h.description,h.images,h.contact_type,h.contact,h.type,h.help_type,h.status,h.like_count,h.create_time,u.avatar,u.nickname from help h,user_info u
         where h.create_user = u.user_id and h.id = #{id}
     </select>
     <select id="countByUserIdAndType" resultType="int">

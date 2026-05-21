@@ -38,6 +38,7 @@ public class HelpDto {
     private String contact;
     private String helpType;
     private String status;
+    private Integer likeCount;
     private String avatar;
     private String nickname;
     private LocalDateTime createTime;

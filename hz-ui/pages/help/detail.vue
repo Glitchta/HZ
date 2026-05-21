@@ -129,11 +129,21 @@
     <!-- 底部操作栏 -->
     <view class="detail-footer" v-if="!showInputPopup && helpInfo.status !== '已结束'">
       <view class="footer-actions">
+        <!-- 点赞按钮 -->
+        <view class="action-collect" @click="handleLike">
+          <uni-icons
+            :type="isLiked ? 'heart-filled' : 'heart'"
+            size="20"
+            :color="isLiked ? '#ff6b6b' : '#666'"
+          ></uni-icons>
+          <text class="action-text">{{ helpInfo.likeCount || 0 }}</text>
+        </view>
+
         <!-- 收藏按钮 -->
         <view class="action-collect" @click="handleCollect">
-          <uni-icons 
-            :type="isCollected ? 'star-filled' : 'star'" 
-            size="20" 
+          <uni-icons
+            :type="isCollected ? 'star-filled' : 'star'"
+            size="20"
             :color="isCollected ? '#ffc107' : '#666'"
           ></uni-icons>
           <text class="action-text">收藏</text>
@@ -224,6 +234,7 @@ const currentUserId = computed(() => {
 
 const commentList = ref([])
 const isCollected = ref(false)
+const isLiked = ref(false)
 const isMine = ref(false)
 const showInputPopup = ref(false)
 
@@ -295,6 +306,8 @@ const fetchHelpDetail = async (id) => {
     
     // 检查是否已收藏
     checkCollectionStatus(id)
+    // 检查是否已点赞
+    checkLikeStatus(id)
   } catch (error) {
     console.error('获取详情失败', error)
     uni.showToast({
@@ -327,6 +340,44 @@ const checkCollectionStatus = async (helpId) => {
     isCollected.value = res.data === true
   } catch (error) {
     console.error('检查收藏状态失败', error)
+  }
+}
+
+const checkLikeStatus = async (helpId) => {
+  try {
+    const res = await request.post('/like/check', { contentId: helpId, contentType: 'help' })
+    isLiked.value = res.data === true
+  } catch (error) {
+    console.error('检查点赞状态失败', error)
+  }
+}
+
+const handleLike = async () => {
+  if (!uni.getStorageSync('token')) {
+    uni.showModal({
+      title: '提示',
+      content: '请先登录',
+      success: (res) => {
+        if (res.confirm) {
+          uni.navigateTo({ url: '/pages/login/login' })
+        }
+      }
+    })
+    return
+  }
+
+  try {
+    if (isLiked.value) {
+      await request.post('/like/cancel', { contentId: helpInfo.value.id, contentType: 'help' })
+      isLiked.value = false
+      helpInfo.value.likeCount = Math.max(0, (helpInfo.value.likeCount || 1) - 1)
+    } else {
+      await request.post('/like/add', { contentId: helpInfo.value.id, contentType: 'help' })
+      isLiked.value = true
+      helpInfo.value.likeCount = (helpInfo.value.likeCount || 0) + 1
+    }
+  } catch (error) {
+    console.error('点赞操作失败', error)
   }
 }
 

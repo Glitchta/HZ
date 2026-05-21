@@ -41,6 +41,7 @@ public class Help {
     private String contact;
     private String helpType;
     private String status;
+    private Integer likeCount;
     private LocalDateTime createTime;
 }
 

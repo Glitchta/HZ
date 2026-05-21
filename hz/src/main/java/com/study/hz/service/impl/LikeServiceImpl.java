@@ -24,6 +24,8 @@ public class LikeServiceImpl extends ServiceImpl<LikeMapper, Like> implements Li
     private LostMapper lostMapper;
     @Autowired
     private DynamicMapper dynamicMapper;
+    @Autowired
+    private HelpMapper helpMapper;
 
     @Override
     public Result addLike(Long contentId, String contentType) {
@@ -103,6 +105,15 @@ public class LikeServiceImpl extends ServiceImpl<LikeMapper, Like> implements Li
                 if (item != null) {
                     item.setLikeCount(Math.max(0, item.getLikeCount() + delta));
                     dynamicMapper.updateById(item);
+                }
+                break;
+            }
+            case "help": {
+                Help item = helpMapper.selectById(contentId);
+                if (item != null) {
+                    item.setLikeCount(Math.max(0,
+                            (item.getLikeCount() != null ? item.getLikeCount() : 0) + delta));
+                    helpMapper.updateById(item);
                 }
                 break;
             }

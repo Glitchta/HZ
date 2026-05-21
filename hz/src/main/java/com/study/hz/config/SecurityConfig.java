@@ -46,6 +46,9 @@ public class SecurityConfig {
                         .requestMatchers("/upload/**").permitAll()
                         // WebSocket路径不需要认证
                         .requestMatchers("/ws/chat").permitAll()
+                        // 管理端静态资源公开，API 需要 ADMIN 角色
+                        .requestMatchers("/admin/api/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").permitAll()
                         // 其他所有接口都需要认证
                         .anyRequest().authenticated()
                 )

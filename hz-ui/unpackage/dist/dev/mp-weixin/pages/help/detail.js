@@ -33,6 +33,7 @@ const _sfc_main = {
     });
     const commentList = common_vendor.ref([]);
     const isCollected = common_vendor.ref(false);
+    const isLiked = common_vendor.ref(false);
     const isMine = common_vendor.ref(false);
     const showInputPopup = common_vendor.ref(false);
     const commentLoading = common_vendor.ref(false);
@@ -87,8 +88,9 @@ const _sfc_main = {
           isMine.value = true;
         }
         checkCollectionStatus(id);
+        checkLikeStatus(id);
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:299", "获取详情失败", error);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:312", "获取详情失败", error);
         common_vendor.index.showToast({
           title: "加载失败",
           icon: "none"
@@ -117,7 +119,7 @@ const _sfc_main = {
             page.value.current++;
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:320", "获取评论失败", e);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:333", "获取评论失败", e);
       } finally {
         commentLoading.value = false;
       }
@@ -127,7 +129,42 @@ const _sfc_main = {
         const res = await utils_request.request.post("/collection/check", { helpId: String(helpId) });
         isCollected.value = res.data === true;
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:329", "检查收藏状态失败", error);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:342", "检查收藏状态失败", error);
+      }
+    };
+    const checkLikeStatus = async (helpId) => {
+      try {
+        const res = await utils_request.request.post("/like/check", { contentId: helpId, contentType: "help" });
+        isLiked.value = res.data === true;
+      } catch (error) {
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:351", "检查点赞状态失败", error);
+      }
+    };
+    const handleLike = async () => {
+      if (!common_vendor.index.getStorageSync("token")) {
+        common_vendor.index.showModal({
+          title: "提示",
+          content: "请先登录",
+          success: (res) => {
+            if (res.confirm) {
+              common_vendor.index.navigateTo({ url: "/pages/login/login" });
+            }
+          }
+        });
+        return;
+      }
+      try {
+        if (isLiked.value) {
+          await utils_request.request.post("/like/cancel", { contentId: helpInfo.value.id, contentType: "help" });
+          isLiked.value = false;
+          helpInfo.value.likeCount = Math.max(0, (helpInfo.value.likeCount || 1) - 1);
+        } else {
+          await utils_request.request.post("/like/add", { contentId: helpInfo.value.id, contentType: "help" });
+          isLiked.value = true;
+          helpInfo.value.likeCount = (helpInfo.value.likeCount || 0) + 1;
+        }
+      } catch (error) {
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:380", "点赞操作失败", error);
       }
     };
     const handleCollect = async () => {
@@ -154,7 +191,7 @@ const _sfc_main = {
           common_vendor.index.showToast({ title: "收藏成功" });
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:358", "操作失败", error);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:409", "操作失败", error);
         common_vendor.index.showToast({
           title: "操作失败",
           icon: "none"
@@ -248,7 +285,7 @@ const _sfc_main = {
           closeCommentPopup();
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:501", "评论失败", e);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:552", "评论失败", e);
       }
     };
     const submitReply = async () => {
@@ -263,7 +300,7 @@ const _sfc_main = {
           closeReplyPopup();
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:514", "回复失败", e);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:565", "回复失败", e);
       }
     };
     const toggleCommentLike = async (item) => {
@@ -274,7 +311,7 @@ const _sfc_main = {
           item.likeCount = item.isLiked ? (item.likeCount || 0) + 1 : Math.max(0, (item.likeCount || 1) - 1);
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:524", "点赞失败", e);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:575", "点赞失败", e);
       }
     };
     const toggleReplyLike = async (parent, reply) => {
@@ -285,7 +322,7 @@ const _sfc_main = {
           reply.likeCount = reply.isLiked ? (reply.likeCount || 0) + 1 : Math.max(0, (reply.likeCount || 1) - 1);
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:534", "点赞失败", e);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:585", "点赞失败", e);
       }
     };
     const deleteComment = (comment2) => {
@@ -309,7 +346,7 @@ const _sfc_main = {
                 common_vendor.index.showToast({ title: result.msg || "删除失败", icon: "none" });
               }
             } catch (e) {
-              common_vendor.index.__f__("error", "at pages/help/detail.vue:557", "删除评论失败", e);
+              common_vendor.index.__f__("error", "at pages/help/detail.vue:608", "删除评论失败", e);
             }
           }
         }
@@ -336,7 +373,7 @@ const _sfc_main = {
                 common_vendor.index.showToast({ title: result.msg || "删除失败", icon: "none" });
               }
             } catch (e) {
-              common_vendor.index.__f__("error", "at pages/help/detail.vue:583", "删除回复失败", e);
+              common_vendor.index.__f__("error", "at pages/help/detail.vue:634", "删除回复失败", e);
             }
           }
         }
@@ -349,7 +386,7 @@ const _sfc_main = {
           comment2.children = res.data || [];
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/help/detail.vue:595", "加载回复失败", e);
+        common_vendor.index.__f__("error", "at pages/help/detail.vue:646", "加载回复失败", e);
       }
     };
     const formatTime = (time) => {
@@ -486,64 +523,71 @@ const _sfc_main = {
         w: !showInputPopup.value && helpInfo.value.status !== "已结束"
       }, !showInputPopup.value && helpInfo.value.status !== "已结束" ? common_vendor.e({
         x: common_vendor.p({
+          type: isLiked.value ? "heart-filled" : "heart",
+          size: "20",
+          color: isLiked.value ? "#ff6b6b" : "#666"
+        }),
+        y: common_vendor.t(helpInfo.value.likeCount || 0),
+        z: common_vendor.o(handleLike, "26"),
+        A: common_vendor.p({
           type: isCollected.value ? "star-filled" : "star",
           size: "20",
           color: isCollected.value ? "#ffc107" : "#666"
         }),
-        y: common_vendor.o(handleCollect, "3a"),
-        z: !showInputPopup.value
+        B: common_vendor.o(handleCollect, "6a"),
+        C: !showInputPopup.value
       }, !showInputPopup.value ? {
-        A: common_vendor.o(($event) => showCommentPopup(), "42")
+        D: common_vendor.o(($event) => showCommentPopup(), "4e")
       } : {}, {
-        B: !showInputPopup.value && helpInfo.value.status !== "已结束"
+        E: !showInputPopup.value && helpInfo.value.status !== "已结束"
       }, !showInputPopup.value && helpInfo.value.status !== "已结束" ? {
-        C: common_vendor.o(handleContact, "7f")
+        F: common_vendor.o(handleContact, "8c")
       } : {}) : {}, {
-        D: common_vendor.p({
+        G: common_vendor.p({
           type: "close",
           size: "20",
           color: "#999"
         }),
-        E: common_vendor.o(closeCommentPopup, "f8"),
-        F: comment.content,
-        G: common_vendor.o(($event) => comment.content = $event.detail.value, "33"),
-        H: common_vendor.o(submitComment, "4e"),
-        I: !comment.content.trim() ? 1 : "",
-        J: common_vendor.sr(commentPopup, "bf511981-7", {
+        H: common_vendor.o(closeCommentPopup, "50"),
+        I: comment.content,
+        J: common_vendor.o(($event) => comment.content = $event.detail.value, "5c"),
+        K: common_vendor.o(submitComment, "26"),
+        L: !comment.content.trim() ? 1 : "",
+        M: common_vendor.sr(commentPopup, "bf511981-8", {
           "k": "commentPopup"
         }),
-        K: common_vendor.o(onCommentPopupChange, "a0"),
-        L: common_vendor.p({
+        N: common_vendor.o(onCommentPopupChange, "2c"),
+        O: common_vendor.p({
           type: "bottom",
           ["mask-click"]: false
         }),
-        M: common_vendor.t(replyTargetName.value),
-        N: common_vendor.p({
+        P: common_vendor.t(replyTargetName.value),
+        Q: common_vendor.p({
           type: "close",
           size: "20",
           color: "#999"
         }),
-        O: common_vendor.o(closeReplyPopup, "1e"),
-        P: `回复 ${replyTargetName.value}：`,
-        Q: replyInput.value,
-        R: common_vendor.o(($event) => replyInput.value = $event.detail.value, "b2"),
-        S: common_vendor.o(submitReply, "18"),
-        T: !replyInput.value.trim() ? 1 : "",
-        U: common_vendor.sr(replyPopup, "bf511981-9", {
+        R: common_vendor.o(closeReplyPopup, "95"),
+        S: `回复 ${replyTargetName.value}：`,
+        T: replyInput.value,
+        U: common_vendor.o(($event) => replyInput.value = $event.detail.value, "c6"),
+        V: common_vendor.o(submitReply, "72"),
+        W: !replyInput.value.trim() ? 1 : "",
+        X: common_vendor.sr(replyPopup, "bf511981-10", {
           "k": "replyPopup"
         }),
-        V: common_vendor.o(onReplyPopupChange, "f3"),
-        W: common_vendor.p({
+        Y: common_vendor.o(onReplyPopupChange, "ed"),
+        Z: common_vendor.p({
           type: "bottom",
           ["mask-click"]: false
         }),
-        X: common_vendor.t(helpInfo.value.contact || "暂未提供联系方式"),
-        Y: common_vendor.o(copyContact, "4c"),
-        Z: common_vendor.o(closeContactPopup, "7a"),
-        aa: common_vendor.sr(contactPopup, "bf511981-11", {
+        aa: common_vendor.t(helpInfo.value.contact || "暂未提供联系方式"),
+        ab: common_vendor.o(copyContact, "67"),
+        ac: common_vendor.o(closeContactPopup, "ae"),
+        ad: common_vendor.sr(contactPopup, "bf511981-12", {
           "k": "contactPopup"
         }),
-        ab: common_vendor.p({
+        ae: common_vendor.p({
           type: "center"
         })
       });

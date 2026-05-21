@@ -59,10 +59,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // 加载用户详情
             com.study.hz.pojo.User user = userService.selectById(userId);
+            if (user == null) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+            // 检查用户是否被禁用
+            if (user.getStatus() != null && user.getStatus() == 1) {
+                response.setContentType("application/json;charset=UTF-8");
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.getWriter().write("{\"code\":-1,\"msg\":\"账号已被禁用\"}");
+                return;
+            }
+            String role = user.getRole() != null ? user.getRole() : "USER";
             UserDetails userDetails = User.builder()
                     .username(user.getUsername())
                     .password(user.getPassword())
-                    .authorities("ROLE_USER")
+                    .authorities("ROLE_" + role.toUpperCase())
                     .build();
             // 验证令牌
             if (jwtUtil.validateToken(jwt)) {
