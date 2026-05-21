@@ -1,0 +1,45 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hz?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+jwt:
+  secret: your-secret-key-here-change-in-production
+  access-token-expiration: 1800000    # 30分钟
+  refresh-token-expiration: 604800000 # 7天
+
+# 应用配置
+app:
+  upload-dir: D:/develop/code/HZ/upload  # 上传文件存储的目录
+  file-access-url-prefix: http://localhost:8080/upload/  # 文件访问路径前缀
+
+# 微信小程序配置
+wechat:
+  app-id: wxec5b8bec87585416
+  app-secret: e437076684a97e4614c65631e761e1b1
+logging:
+  level:
+    com.baomidou.mybatisplus: debug
+    # 如果你有自己的 Mapper 包，也可以单独设置
+    com.study.hz.mapper: debug

@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/alumni/alumni",
+    "pages/message/message",
+    "pages/profile/profile",
+    "pages/search/search",
+    "pages/login/login",
+    "pages/login/register",
+    "pages/help/resort",
+    "pages/help/help",
+    "pages/help/detail",
+    "pages/profile/collection",
+    "pages/profile/likes",
+    "pages/profile/edit",
+    "pages/hole/list",
+    "pages/hole/create",
+    "pages/hole/detail",
+    "pages/lost/list",
+    "pages/lost/create",
+    "pages/lost/detail",
+    "pages/message/chat",
+    "pages/alumni/create",
+    "pages/alumni/detail",
+    "pages/alumni/my-posts"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "校园互助",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#007AFF",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "iconHeight": "60rpx",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/首页.png",
+        "selectedIconPath": "static/tabbar/首页点亮.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/alumni/alumni",
+        "iconPath": "static/tabbar/校友圈.png",
+        "selectedIconPath": "static/tabbar/校友圈点亮.png",
+        "text": "校友圈"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "static/tabbar/消息.png",
+        "selectedIconPath": "static/tabbar/消息点亮.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "iconPath": "static/tabbar/我的.png",
+        "selectedIconPath": "static/tabbar/我的点亮.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

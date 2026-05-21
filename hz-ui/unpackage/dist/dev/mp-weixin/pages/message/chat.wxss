@@ -1,0 +1,355 @@
+
+.chat-container.data-v-013fa921 {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 聊天内容区域 */
+.chat-content.data-v-013fa921 {
+  flex: 1;
+  padding: 20rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 加载更多提示 */
+.load-more.data-v-013fa921 {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 历史消息分隔线 */
+.history-divider.data-v-013fa921 {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  position: relative;
+}
+.history-divider.data-v-013fa921::before,
+.history-divider.data-v-013fa921::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1rpx;
+  background-color: #eee;
+}
+.history-divider.data-v-013fa921::before {
+  left: 0;
+}
+.history-divider.data-v-013fa921::after {
+  right: 0;
+}
+
+/* 消息包装器 */
+.message-wrapper.data-v-013fa921 {
+  margin-bottom: 30rpx;
+  opacity: 0;
+  animation: fadeIn-013fa921 0.3s ease forwards;
+  display: flex;
+  align-items: flex-start;
+  min-height: 100rpx;
+}
+@keyframes fadeIn-013fa921 {
+from {
+    opacity: 0;
+    transform: translateY(20rpx);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+/* 自己消息布局 - 头像在右侧，消息在左侧 */
+.own-wrapper.data-v-013fa921 {
+  justify-content: flex-end;
+  flex-direction: row; /* 从左到右：气泡 -> 头像 */
+}
+
+/* 对方消息布局 - 头像在左侧，消息在右侧 */
+.other-wrapper.data-v-013fa921 {
+  justify-content: flex-start;
+  flex-direction: row; /* 从左到右：头像 -> 气泡 */
+}
+
+/* 动画效果 */
+.own-wrapper.data-v-013fa921 {
+  animation: slideInRight-013fa921 0.3s ease forwards;
+}
+.other-wrapper.data-v-013fa921 {
+  animation: slideInLeft-013fa921 0.3s ease forwards;
+}
+@keyframes slideInRight-013fa921 {
+from {
+    opacity: 0;
+    transform: translateX(100rpx);
+}
+to {
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+@keyframes slideInLeft-013fa921 {
+from {
+    opacity: 0;
+    transform: translateX(-100rpx);
+}
+to {
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+
+/* 时间分隔线 */
+.time-divider.data-v-013fa921 {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  width: 100%;
+}
+
+/* 对方头像和昵称 */
+.message-header-info.data-v-013fa921 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20rpx;
+  width: 80rpx;
+  flex-shrink: 0;
+}
+.msg-avatar.data-v-013fa921 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+.msg-nickname.data-v-013fa921 {
+  font-size: 20rpx;
+  color: #666;
+  margin-top: 5rpx;
+  text-align: center;
+  max-width: 80rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 发送方头像容器 - 在气泡右侧 */
+.own-avatar-container.data-v-013fa921 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20rpx;
+  width: 80rpx;
+  flex-shrink: 0;
+  order: 2; /* 确保头像在右侧 */
+}
+.own-avatar.data-v-013fa921 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+/* 消息气泡 */
+.message-bubble.data-v-013fa921 {
+  max-width: 70%;
+  min-width: 120rpx;
+  position: relative;
+  padding: 20rpx;
+  animation: bubbleAppear-013fa921 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20rpx;
+  word-wrap: break-word;
+  word-break: break-word;
+  flex-shrink: 0;
+}
+@keyframes bubbleAppear-013fa921 {
+from {
+    transform: scale(0.8);
+    opacity: 0;
+}
+to {
+    transform: scale(1);
+    opacity: 1;
+}
+}
+
+/* 自己消息气泡 - 右侧气泡，尾巴在右侧 */
+.own-message.data-v-013fa921 {
+  background: linear-gradient(135deg, #95ec69, #95ec69);
+  color: #fff;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 5rpx;
+  order: 1; /* 确保气泡在左侧 */
+  align-self: flex-end;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* 对方消息气泡 - 左侧气泡，尾巴在左侧 */
+.other-message.data-v-013fa921 {
+  background-color: #fff;
+  color: #333;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-left-radius: 5rpx;
+  border-bottom-right-radius: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+  order: 2; /* 确保气泡在右侧 */
+  align-self: flex-start;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* 发送中状态 */
+.message-sending.data-v-013fa921 {
+  opacity: 0.7;
+}
+
+/* 发送失败提示 */
+.send-fail.data-v-013fa921 {
+  position: absolute;
+  top: -30rpx;
+  right: 0;
+  font-size: 24rpx;
+  color: #ff3b30;
+  text-align: right;
+  white-space: nowrap;
+}
+.own-message .send-fail.data-v-013fa921 {
+  right: auto;
+  left: 0;
+  text-align: left;
+}
+.fail-text.data-v-013fa921 {
+  font-size: 24rpx;
+  color: #ff3b30;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 4rpx 8rpx;
+  border-radius: 8rpx;
+}
+
+/* 消息内容 */
+.message-content.data-v-013fa921 {
+  margin-bottom: 10rpx;
+  min-width: 0; /* 防止文本溢出 */
+}
+.message-text.data-v-013fa921 {
+  font-size: 28rpx;
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.own-message .message-text.data-v-013fa921 {
+  color: #fff;
+}
+.other-message .message-text.data-v-013fa921 {
+  color: #333;
+}
+
+/* 消息状态 */
+.message-status.data-v-013fa921 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 24rpx;
+  margin-top: 5rpx;
+  opacity: 0.8;
+}
+.own-message .message-status.data-v-013fa921 {
+  justify-content: flex-end;
+  color: rgba(255, 255, 255, 0.8);
+}
+.other-message .message-status.data-v-013fa921 {
+  justify-content: flex-start;
+  color: #999;
+}
+.message-time.data-v-013fa921 {
+  font-size: 22rpx;
+}
+
+/* 没有消息提示 */
+.no-message.data-v-013fa921 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+  padding: 40rpx;
+}
+
+/* 输入区域 */
+.chat-input-area.data-v-013fa921 {
+  display: flex;
+  align-items: flex-end;
+  background-color: #fff;
+  border-top: 1rpx solid #eee;
+  padding: 20rpx;
+  box-sizing: border-box;
+  min-height: 100rpx;
+  position: relative;
+  z-index: 10;
+}
+
+/* 输入框容器 */
+.input-container.data-v-013fa921 {
+  flex: 1;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 40rpx;
+  padding: 0 20rpx;
+  min-height: 60rpx;
+  max-height: 200rpx;
+}
+.chat-input.data-v-013fa921 {
+  width: 100%;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  line-height: 1.5;
+  min-height: 40rpx;
+  max-height: 160rpx;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 发送按钮容器 */
+.send-container.data-v-013fa921 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+}
+.send-btn.data-v-013fa921 {
+  width: 100rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e4e4e4;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  color: #999;
+  transition: all 0.3s;
+}
+.send-btn-active.data-v-013fa921 {
+  background-color: #07c160;
+  color: #fff;
+}

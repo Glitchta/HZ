@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.mapper.SearchMapper">
+
+    <resultMap id="SearchResultMap" type="com.study.hz.dto.MyPostDto">
+        <id property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="images" column="images"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="search" resultMap="SearchResultMap">
+        <foreach collection="typeList" item="t" separator=" UNION ALL ">
+            <if test="t == 'help'">
+                SELECT h.id, 'help' AS type, h.title, h.description AS content,
+                       h.images, 0 AS comment_count, 0 AS like_count, 0 AS view_count, h.create_time
+                FROM help h
+                WHERE 1=1
+                <if test="keyword != null and keyword != ''">
+                    AND (h.title LIKE CONCAT('%', #{keyword}, '%') OR h.description LIKE CONCAT('%', #{keyword}, '%'))
+                </if>
+            </if>
+            <if test="t == 'lost'">
+                SELECT l.id, 'lost' AS type, NULL AS title, l.description AS content,
+                       l.images, l.comment_count, l.like_count, 0 AS view_count, l.create_time
+                FROM lost l
+                WHERE 1=1
+                <if test="keyword != null and keyword != ''">
+                    AND l.description LIKE CONCAT('%', #{keyword}, '%')
+                </if>
+            </if>
+            <if test="t == 'hole'">
+                SELECT hh.id, 'hole' AS type, NULL AS title, hh.content,
+                       hh.images, hh.comment_count, hh.like_count, 0 AS view_count, hh.create_time
+                FROM hole hh
+                WHERE 1=1
+                <if test="keyword != null and keyword != ''">
+                    AND hh.content LIKE CONCAT('%', #{keyword}, '%')
+                </if>
+            </if>
+            <if test="t == 'alumni'">
+                SELECT d.id, 'alumni' AS type, d.title, d.content,
+                       d.images, d.comment_count, d.like_count, 0 AS view_count, d.create_time
+                FROM dynamic d
+                WHERE 1=1
+                <if test="keyword != null and keyword != ''">
+                    AND (d.title LIKE CONCAT('%', #{keyword}, '%') OR d.content LIKE CONCAT('%', #{keyword}, '%'))
+                </if>
+            </if>
+        </foreach>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+</mapper>

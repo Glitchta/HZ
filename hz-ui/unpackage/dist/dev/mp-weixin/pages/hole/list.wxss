@@ -1,0 +1,283 @@
+
+.hole-container.data-v-6fdf2d0e {
+  padding-top: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+/* 顶部标题栏 */
+.top-bar.data-v-6fdf2d0e {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40rpx 30rpx 20rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+.top-title.data-v-6fdf2d0e {
+  display: flex;
+  flex-direction: column;
+}
+.title-text.data-v-6fdf2d0e {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+.title-sub.data-v-6fdf2d0e {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+.top-actions.data-v-6fdf2d0e {
+  padding: 10rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 发布按钮 */
+.publish-btn.data-v-6fdf2d0e {
+  position: fixed;
+  bottom: 40rpx;
+  right: 30rpx;
+  z-index: 100;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50rpx;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6rpx 20rpx rgba(102, 126, 234, 0.4);
+}
+.publish-text.data-v-6fdf2d0e {
+  color: white;
+  font-size: 28rpx;
+  margin-left: 10rpx;
+  font-weight: 500;
+}
+
+/* 树洞列表 */
+.hole-list.data-v-6fdf2d0e {
+  height: calc(100vh - 200rpx);
+}
+.hole-item.data-v-6fdf2d0e {
+  background-color: #fbebff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.hole-item.data-v-6fdf2d0e:active {
+  transform: translateY(-2rpx);
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+.hole-content.data-v-6fdf2d0e {
+  margin-bottom: 30rpx;
+}
+.hole-text.data-v-6fdf2d0e {
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+/* 图片展示 */
+.hole-images.data-v-6fdf2d0e {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+  gap: 10rpx;
+}
+.hole-image.data-v-6fdf2d0e {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  background-color: #f5f5f5;
+}
+.image-more.data-v-6fdf2d0e {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+/* 树洞底部 */
+.hole-footer.data-v-6fdf2d0e {
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 20rpx;
+}
+.hole-meta.data-v-6fdf2d0e {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.meta-item.data-v-6fdf2d0e {
+  display: flex;
+  align-items: center;
+  color: #999;
+  font-size: 24rpx;
+}
+.meta-text.data-v-6fdf2d0e {
+  margin-left: 8rpx;
+}
+
+/* 标签 */
+.hole-tags.data-v-6fdf2d0e {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+.hole-tag.data-v-6fdf2d0e {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+.tag-more.data-v-6fdf2d0e {
+  color: #999;
+  font-size: 22rpx;
+  line-height: 40rpx;
+  margin-left: 10rpx;
+}
+
+/* 加载状态 */
+.loading-more.data-v-6fdf2d0e,
+.no-more.data-v-6fdf2d0e {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 空状态 */
+.empty-state.data-v-6fdf2d0e {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  text-align: center;
+}
+.empty-image.data-v-6fdf2d0e {
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.5;
+  margin-bottom: 40rpx;
+}
+.empty-text.data-v-6fdf2d0e {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}
+.empty-subtext.data-v-6fdf2d0e {
+  font-size: 28rpx;
+  color: #ccc;
+}
+
+/* 筛选弹窗 */
+.filter-popup.data-v-6fdf2d0e {
+  background-color: white;
+  border-radius: 40rpx 40rpx 0 0;
+  padding: 40rpx 30rpx;
+  max-height: 80vh;
+}
+.popup-header.data-v-6fdf2d0e {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.popup-title.data-v-6fdf2d0e {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+.filter-section.data-v-6fdf2d0e {
+  margin-bottom: 40rpx;
+}
+.section-title.data-v-6fdf2d0e {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+.option-list.data-v-6fdf2d0e {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.option-item.data-v-6fdf2d0e {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #f8f9fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s;
+}
+.option-item.active.data-v-6fdf2d0e {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  border: 1rpx solid #91d5ff;
+}
+.tag-list.data-v-6fdf2d0e {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+.tag-option.data-v-6fdf2d0e {
+  padding: 12rpx 24rpx;
+  background-color: #f8f9fa;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  color: #666;
+  transition: all 0.3s;
+}
+.tag-option.active.data-v-6fdf2d0e {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  border: 1rpx solid #91d5ff;
+}
+.popup-footer.data-v-6fdf2d0e {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+.btn-reset.data-v-6fdf2d0e,
+.btn-confirm.data-v-6fdf2d0e {
+  flex: 1;
+  text-align: center;
+  padding: 25rpx 0;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+.btn-reset.data-v-6fdf2d0e {
+  background-color: #f8f9fa;
+  color: #666;
+  margin-right: 20rpx;
+}
+.btn-confirm.data-v-6fdf2d0e {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin-left: 20rpx;
+}

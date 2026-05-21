@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.mapper.MyPostMapper">
+
+    <resultMap id="MyPostResultMap" type="com.study.hz.dto.MyPostDto">
+        <id property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="images" column="images"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="status" column="status"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <!-- 全部：UNION ALL四表合并 -->
+    <select id="selectAllByUserId" resultMap="MyPostResultMap">
+        SELECT * FROM (
+            SELECT id, 'hole' AS type, NULL AS title, content, images,
+                   '' AS status, comment_count, like_count, 0 AS view_count, create_time
+            FROM hole WHERE create_user = #{userId}
+            UNION ALL
+            SELECT id, 'lost' AS type, NULL AS title, description AS content, images,
+                   '' AS status, comment_count, like_count, 0 AS view_count, create_time
+            FROM lost WHERE create_user = #{userId}
+            UNION ALL
+            SELECT id, 'help' AS type, title, description AS content, images,
+                   status, 0 AS comment_count, 0 AS like_count, 0 AS view_count, create_time
+            FROM help WHERE create_user = #{userId} AND type = '求助'
+            UNION ALL
+            SELECT id, 'helped' AS type, title, description AS content, images,
+                   status, 0 AS comment_count, 0 AS like_count, 0 AS view_count, create_time
+            FROM help WHERE create_user = #{userId} AND type = '帮忙'
+            UNION ALL
+            SELECT id, 'alumni' AS type, title, content, images,
+                   '' AS status, comment_count, like_count, 0 AS view_count, create_time
+            FROM dynamic WHERE create_user = #{userId}
+        ) t ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <!-- 求助 -->
+    <select id="selectHelpByUserId" resultMap="MyPostResultMap">
+        SELECT id, 'help' AS type, title, description AS content, images,
+               status, 0 AS comment_count, 0 AS like_count, 0 AS view_count, create_time
+        FROM help WHERE create_user = #{userId} AND type = '求助'
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <!-- 帮助 -->
+    <select id="selectHelpedByUserId" resultMap="MyPostResultMap">
+        SELECT id, 'helped' AS type, title, description AS content, images,
+               status, 0 AS comment_count, 0 AS like_count, 0 AS view_count, create_time
+        FROM help WHERE create_user = #{userId} AND type = '帮忙'
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <!-- 失物招领 -->
+    <select id="selectLostByUserId" resultMap="MyPostResultMap">
+        SELECT id, 'lost' AS type, NULL AS title, description AS content, images,
+               '' AS status, comment_count, like_count, 0 AS view_count, create_time
+        FROM lost WHERE create_user = #{userId}
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <!-- 树洞 -->
+    <select id="selectHoleByUserId" resultMap="MyPostResultMap">
+        SELECT id, 'hole' AS type, NULL AS title, content, images,
+               '' AS status, comment_count, like_count, 0 AS view_count, create_time
+        FROM hole WHERE create_user = #{userId}
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <!-- 校友圈 -->
+    <select id="selectAlumniByUserId" resultMap="MyPostResultMap">
+        SELECT id, 'alumni' AS type, title, content, images,
+               '' AS status, comment_count, like_count, 0 AS view_count, create_time
+        FROM dynamic WHERE create_user = #{userId}
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.mapper.UserInfoMapper">
+
+    <select id="selectById" resultType="com.study.hz.pojo.UserInfo" parameterType="java.lang.Long">
+        select * from user_info where user_id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.study.hz.pojo.UserInfo">
+        insert into user_info(nickname, avatar, sign, user_id) value(#{userInfo.nickname}, #{userInfo.avatar}, #{userInfo.sign}, #{userInfo.userId})
+    </insert>
+    <update id="updateUserInfo" parameterType="com.study.hz.pojo.UserInfo">
+        update user_info
+        set nickname = #{userInfo.nickname},
+        avatar = #{userInfo.avatar},sign = #{userInfo.sign},
+        user_id = #{userInfo.userId},gender = #{userInfo.gender},
+        birthday = #{userInfo.birthday}, major = #{userInfo.major},
+        phone = #{userInfo.phone}, email= #{userInfo.email},
+        tags = #{userInfo.tags}, introduction = #{userInfo.introduction}
+        where user_id = #{userInfo.userId}
+    </update>
+</mapper>

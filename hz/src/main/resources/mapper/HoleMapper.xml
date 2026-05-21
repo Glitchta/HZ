@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.mapper.HoleMapper">
+    <!-- 自定义 ResultMap，手动指定每个字段的映射 -->
+    <resultMap id="HoleResultMap" type="com.study.hz.pojo.Hole">
+        <id property="id" column="id"/>
+        <result property="createUser" column="create_user"/>
+        <result property="content" column="content"/>
+        <!-- 关键：为 images 字段指定 JacksonTypeHandler -->
+        <result property="images" column="images"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="likeCount" column="like_count"/>
+    </resultMap>
+
+    <select id="getHoleList" resultMap="HoleResultMap">
+        select * from hole
+        limit #{offset},#{size}
+    </select>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.mapper.MessageMapper">
+
+    <select id="selectMessage" parameterType="java.lang.Long" resultType="com.study.hz.dto.MessageDto">
+        SELECT
+            t.id,
+            t.sender_id,
+            t.receiver_id,
+            t.partner_id as target_id,
+            t.type,
+            t.content,
+            t.status,
+            t.timestamp,
+            t.is_read,
+            -- 对方的昵称
+            u.nickname,
+            -- 对方的头像
+            u.avatar
+        FROM (
+                 SELECT
+                     id, sender_id, receiver_id, type, content, status, timestamp, is_read,
+                     -- 核心：确定对话的另一方ID
+                     CASE
+                         WHEN sender_id = #{id} THEN receiver_id
+                         ELSE sender_id
+                         END AS partner_id,
+                     -- 窗口函数：按对方ID分组，按时间降序排列
+                     ROW_NUMBER() OVER (
+                         PARTITION BY CASE
+                                          WHEN sender_id = #{id} THEN receiver_id
+                                          ELSE sender_id
+                             END
+                         ORDER BY timestamp DESC
+                         ) as rn
+                 FROM message
+                 WHERE sender_id = #{id} OR receiver_id = #{id}
+             ) t
+-- 关联用户信息表，查出对方的资料
+                 LEFT JOIN user_info u ON t.partner_id = u.user_id
+-- 只取每个对话伙伴的最新一条记录
+        WHERE t.rn = 1
+        ORDER BY t.timestamp DESC;
+    </select>
+
+    <select id="getChatMessages" resultType="com.study.hz.pojo.Message">
+        SELECT * FROM message
+        WHERE (sender_id = #{senderId} AND receiver_id = #{receiverId})
+           OR (sender_id = #{receiverId} AND receiver_id = #{senderId})
+        ORDER BY timestamp DESC
+        LIMIT #{offset} , #{size}
+    </select>
+
+    <select id="countUnreadMessages" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM message
+        WHERE receiver_id = #{receiverId} AND is_read = 0
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.hz.mapper.LostMapper">
+    <!-- 自定义 ResultMap，手动指定每个字段的映射 -->
+    <resultMap id="LostResultMap" type="com.study.hz.dto.LostDto">
+        <id property="id" column="id"/>
+        <result property="createUser" column="create_user"/>
+        <result property="description" column="description"/>
+        <!-- 关键：为 images 字段指定 JacksonTypeHandler -->
+        <result property="images" column="images"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="createTime" column="create_time"/>
+        <result property="nickname" column="nickname"/>
+    </resultMap>
+
+    <select id="selectLostList" resultMap="LostResultMap">
+        select l.id,l.create_user,l.description,l.images,l.comment_count,l.like_count,l.create_time,u.nickname,u.avatar from lost l ,user_info u
+        where l.create_user = u.user_id
+        limit #{offset},#{size}
+    </select>
+
+    <select id="selectLostById" resultMap="LostResultMap" parameterType="java.lang.Long">
+        select l.id,l.create_user,l.description,l.images,l.comment_count,l.like_count,l.create_time,u.nickname,u.avatar from lost l ,user_info u
+        where l.create_user = u.user_id and l.id = #{id}
+    </select>
+
+</mapper>

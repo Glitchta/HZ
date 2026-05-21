@@ -1,0 +1,250 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "校园互助"
+      }
+    },
+    {
+      "path": "pages/alumni/alumni",
+      "style": {
+        "navigationBarTitleText": "校友圈"
+      }
+    },
+    {
+      "path": "pages/message/message",
+      "style": {
+        "navigationBarTitleText": "消息"
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+        "path" : "pages/search/search",
+        "style" :
+        {
+            "navigationBarTitleText" : "搜索"
+        }
+    },
+    {
+    	"path" : "pages/login/login",
+    	"style" :
+    	{
+    		"navigationBarTitleText" : ""
+    	}
+    },
+    {
+    	"path" : "pages/login/register",
+    	"style" :
+    	{
+    		"navigationBarTitleText" : ""
+    	}
+    },{
+	      "path": "pages/help/resort",
+	      "style": {
+	        "navigationBarTitleText": "我要求助",
+	        "navigationBarBackgroundColor": "#ffffff",
+	        "navigationBarTextStyle": "black",
+	        "enablePullDownRefresh": false,
+	        "backgroundColor": "#f5f5f5"
+	      }
+	    },
+		{
+	      "path": "pages/help/help",
+	      "style": {
+	        "navigationBarTitleText": "我能帮忙",
+	        "navigationBarBackgroundColor": "#ffffff",
+	        "navigationBarTextStyle": "black",
+	        "enablePullDownRefresh": false,
+	        "backgroundColor": "#f5f5f5"
+	      }
+	    },
+		{
+	      "path": "pages/help/detail",
+	      "style": {
+	        "navigationBarTitleText": "详情界面",
+	        "navigationBarBackgroundColor": "#ffffff",
+	        "navigationBarTextStyle": "black",
+	        "enablePullDownRefresh": false,
+	        "backgroundColor": "#f5f5f5"
+	      }
+	    },
+		{
+		      "path": "pages/profile/collection",
+		      "style": {
+		        "navigationBarTitleText": "我的收藏",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/profile/likes",
+		      "style": {
+		        "navigationBarTitleText": "我的点赞",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/profile/edit",
+		      "style": {
+		        "navigationBarTitleText": "编辑资料",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/hole/list",
+		      "style": {
+		        "navigationBarTitleText": "匿名树洞",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/hole/create",
+		      "style": {
+		        "navigationBarTitleText": "我有话想说",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/hole/detail",
+		      "style": {
+		        "navigationBarTitleText": "详情",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/lost/list",
+		      "style": {
+		        "navigationBarTitleText": "失物招领",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/lost/create",
+		      "style": {
+		        "navigationBarTitleText": "发布失物招领",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/lost/detail",
+		      "style": {
+		        "navigationBarTitleText": "失物信息",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/message/chat",
+		      "style": {
+		        "navigationBarTitleText": "信息",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/alumni/create",
+		      "style": {
+		        "navigationBarTitleText": "发布动态",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/alumni/detail",
+		      "style": {
+		        "navigationBarTitleText": "动态详情",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    },
+		{
+		      "path": "pages/alumni/my-posts",
+		      "style": {
+		        "navigationBarTitleText": "我的发布",
+		        "navigationBarBackgroundColor": "#ffffff",
+		        "navigationBarTextStyle": "black",
+		        "enablePullDownRefresh": false,
+		        "backgroundColor": "#f5f5f5"
+		      }
+		    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "校园互助",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#007AFF",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "height": "120rpx",
+    "iconWidth": "60rpx",
+    "iconHeight": "60rpx",
+    "fontSize": "22rpx",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/首页.png",
+        "selectedIconPath": "static/tabbar/首页点亮.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/alumni/alumni",
+        "iconPath": "static/tabbar/校友圈.png",
+        "selectedIconPath": "static/tabbar/校友圈点亮.png",
+        "text": "校友圈"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "static/tabbar/消息.png",
+        "selectedIconPath": "static/tabbar/消息点亮.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "iconPath": "static/tabbar/我的.png",
+        "selectedIconPath": "static/tabbar/我的点亮.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

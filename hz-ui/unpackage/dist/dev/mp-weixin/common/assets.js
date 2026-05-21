@@ -1,0 +1,26 @@
+"use strict";
+const _imports_0$4 = "/static/index/求助.png";
+const _imports_1$1 = "/static/index/帮助.png";
+const _imports_2$2 = "/static/index/树洞.png";
+const _imports_3 = "/static/index/失物招领.png";
+const _imports_0$3 = "/static/hole/empty.png";
+const _imports_0$2 = "/static/images/login-bg.png";
+const _imports_1 = "/static/icons/user.png";
+const _imports_2$1 = "/static/icons/clear.png";
+const _imports_2 = "/static/icons/lock.png";
+const _imports_4 = "/static/icons/wechat.png";
+const _imports_0$1 = "/static/icons/back.png";
+const _imports_0 = "/static/hole/empty-comment.png";
+exports._imports_0 = _imports_0$4;
+exports._imports_0$1 = _imports_0$3;
+exports._imports_0$2 = _imports_0$2;
+exports._imports_0$3 = _imports_0$1;
+exports._imports_0$4 = _imports_0;
+exports._imports_1 = _imports_1$1;
+exports._imports_1$1 = _imports_1;
+exports._imports_2 = _imports_2$2;
+exports._imports_2$1 = _imports_2;
+exports._imports_2$2 = _imports_2$1;
+exports._imports_3 = _imports_3;
+exports._imports_4 = _imports_4;
+//# sourceMappingURL=../../.sourcemap/mp-weixin/common/assets.js.map

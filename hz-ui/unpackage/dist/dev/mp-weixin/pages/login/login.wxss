@@ -1,0 +1,233 @@
+
+.login-container.data-v-e4e4508d {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #9dbde7 0%,#709edd 100%);
+}
+.header-bg.data-v-e4e4508d {
+  height: 280rpx;
+  position: relative;
+}
+.bg-image.data-v-e4e4508d {
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+.header-content.data-v-e4e4508d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.welcome-text.data-v-e4e4508d {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+.sub-text.data-v-e4e4508d {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+.form-container.data-v-e4e4508d {
+  padding: 0 40rpx;
+  position: relative;
+  z-index: 1;
+  margin-top: -40rpx;
+}
+.form-card.data-v-e4e4508d {
+  background: white;
+  border-radius: 24rpx;
+  padding: 60rpx 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.1);
+}
+.input-group.data-v-e4e4508d {
+  margin-bottom: 50rpx;
+}
+.input-item.data-v-e4e4508d {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 30rpx;
+  height: 100rpx;
+  margin-bottom: 30rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+.input-item.data-v-e4e4508d:focus-within {
+  border-color: #667eea;
+  background: #f0f2ff;
+}
+.input-icon.data-v-e4e4508d {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+input.data-v-e4e4508d {
+  flex: 1;
+  height: 100%;
+  font-size: 30rpx;
+  color: #333;
+}
+.placeholder.data-v-e4e4508d {
+  color: #999;
+  font-size: 30rpx;
+}
+.clear-icon.data-v-e4e4508d, .eye-icon.data-v-e4e4508d {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+  opacity: 0.5;
+}
+.clear-icon.data-v-e4e4508d:active, .eye-icon.data-v-e4e4508d:active {
+  opacity: 0.8;
+}
+.form-options.data-v-e4e4508d {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60rpx;
+}
+.remember-me.data-v-e4e4508d {
+  display: flex;
+  align-items: center;
+}
+.checkbox.data-v-e4e4508d {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid #ccc;
+  border-radius: 6rpx;
+  margin-right: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.checkbox.checked.data-v-e4e4508d {
+  background: #667eea;
+  border-color: #667eea;
+}
+.checkmark.data-v-e4e4508d {
+  color: white;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.option-text.data-v-e4e4508d, .forgot-password.data-v-e4e4508d {
+  font-size: 28rpx;
+  color: #666;
+}
+.forgot-password.data-v-e4e4508d {
+  color: #667eea;
+}
+.forgot-password.data-v-e4e4508d:active, .register-link.data-v-e4e4508d:active, .agreement-link.data-v-e4e4508d:active {
+  opacity: 0.7;
+}
+.login-btn.data-v-e4e4508d {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 12rpx;
+  font-size: 36rpx;
+  border: none;
+  margin-bottom: 50rpx;
+  position: relative;
+  overflow: hidden;
+}
+.login-btn.data-v-e4e4508d::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.login-btn.data-v-e4e4508d:not([disabled]):active::after {
+  opacity: 1;
+}
+.login-btn.disabled.data-v-e4e4508d {
+  background: #ccc;
+  color: #999;
+}
+.third-party-login.data-v-e4e4508d {
+  text-align: center;
+  margin-bottom: 50rpx;
+}
+.divider.data-v-e4e4508d {
+  display: block;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  position: relative;
+  margin-bottom: 40rpx;
+}
+.divider.data-v-e4e4508d::before, .divider.data-v-e4e4508d::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1rpx;
+  background: #eee;
+}
+.divider.data-v-e4e4508d::before {
+  left: 0;
+}
+.divider.data-v-e4e4508d::after {
+  right: 0;
+}
+.third-party-icons.data-v-e4e4508d {
+  display: flex;
+  justify-content: center;
+  gap: 80rpx;
+}
+.wechat-login-btn.data-v-e4e4508d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wechat-login-btn.disabled.data-v-e4e4508d {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.wechat-btn-icon.data-v-e4e4508d {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 16rpx;
+  border-radius: 50%;
+  background: #f5f5f5;
+  padding: 20rpx;
+  box-sizing: content-box;
+}
+.wechat-btn-text.data-v-e4e4508d {
+  font-size: 24rpx;
+  color: #666;
+}
+.register-tip.data-v-e4e4508d {
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+.register-link.data-v-e4e4508d {
+  color: #667eea;
+  margin-left: 10rpx;
+  font-weight: 500;
+}
+.agreement.data-v-e4e4508d {
+  text-align: center;
+  font-size: 24rpx;
+  color: #000000;
+  padding: 40rpx 0;
+  line-height: 1.6;
+}
+.agreement-link.data-v-e4e4508d {
+  color: #0000ff;
+  margin: 0 4rpx;
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i '598,606s|params: {|{|' detail.vue)",
+      "Bash(sed -i '598,606s|page: 1,||' detail.vue)",
+      "Bash(sed -i '598,606s|parentId:|parentId: comment.id, offset: 0,|' detail.vue)",
+      "Bash(sed -i '143s/<view /<view v-if=\"!showInputPopup\" /' detail.vue)",
+      "Bash(sed -i '147s/<button class=\"action-btn primary\"/<button v-if=\"!showInputPopup \\\\&\\\\& helpInfo.status !== '\\\\''已结束'\\\\''\" class=\"action-btn primary\"/' detail.vue)",
+      "Bash(sed -i '147s/ v-if=\"helpInfo.status !== .已结束.\"//' detail.vue)"
+    ]
+  }
+}
