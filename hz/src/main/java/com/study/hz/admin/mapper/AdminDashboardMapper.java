@@ -13,6 +13,8 @@ public interface AdminDashboardMapper {
 
     Long countHelps();
 
+    Long countHelpOffers();
+
     Long countHoles();
 
     Long countLosts();

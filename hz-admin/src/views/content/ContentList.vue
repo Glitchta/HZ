@@ -3,13 +3,6 @@
     <div class="page-header"><h2>内容管理</h2><span class="page-subtitle">管理所有校园互助内容</span></div>
     <el-card shadow="hover" class="table-card">
       <div class="toolbar">
-        <el-select v-model="contentType" placeholder="内容类型" clearable style="width:150px" @change="fetchList" size="large">
-          <el-option label="全部" value="" />
-          <el-option label="求助" value="help" />
-          <el-option label="树洞" value="hole" />
-          <el-option label="失物招领" value="lost" />
-          <el-option label="校友圈" value="dynamic" />
-        </el-select>
         <el-input v-model="keyword" placeholder="搜索关键词" style="width:260px" clearable @clear="fetchList" @keyup.enter="fetchList" size="large">
           <template #prefix><el-icon><Search /></el-icon></template>
         </el-input>
@@ -18,7 +11,7 @@
       <el-table :data="tableData" v-loading="loading" stripe style="width:100%">
         <el-table-column label="类型" width="90">
           <template #default="{ row }">
-            <el-tag :type="typeColor(row.type)" size="small" effect="dark" round>{{ typeLabel(row.type) }}</el-tag>
+            <el-tag :style="{ background: typeBgColor(row.type), color: '#333', border: 'none' }" size="small" round>{{ typeLabel(row.type) }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="id" label="ID" width="180" />
@@ -59,13 +52,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 import request from '../../utils/request'
 
-const current=ref(1),size=ref(10),total=ref(0),contentType=ref(''),keyword=ref(''),loading=ref(false)
+const route = useRoute()
+const current=ref(1),size=ref(10),total=ref(0),keyword=ref(''),loading=ref(false)
 const tableData=ref([]),detailVisible=ref(false),detail=ref(null)
+const contentType = ref(route.params.type || '')
+
+watch(() => route.params.type, (val) => { contentType.value = val || ''; current.value = 1; fetchList() })
 onMounted(()=>fetchList())
 
 async function fetchList(){
@@ -74,8 +72,8 @@ async function fetchList(){
 }
 async function showDetail(row){try{const r=await request.get(`/content/${row.type.toLowerCase()}/${row.id}`);detail.value=r.data;detailVisible.value=true}catch(_){}}
 async function handleDelete(row){try{await request.delete(`/content/${row.type.toLowerCase()}/${row.id}`);ElMessage.success('删除成功');fetchList()}catch(_){}}
-function typeLabel(t){const m={HELP:'求助',HOLE:'树洞',LOST:'失物招领',DYNAMIC:'校友圈'};return m[t]||t}
-function typeColor(t){const m={HELP:'',HOLE:'warning',LOST:'danger',DYNAMIC:'success'};return m[t]||'info'}
+function typeLabel(t){const m={HELP:'互助',HELP_ASK:'求助',HELP_OFFER:'帮忙',HOLE:'树洞',LOST:'失物招领',DYNAMIC:'校友圈'};return m[t]||t}
+function typeBgColor(t){const m={HELP:'#f5d0d4',HELP_ASK:'#f5d0d4',HELP_OFFER:'#f0ddb8',HOLE:'#b8e8f0',LOST:'#b8e8d8',DYNAMIC:'#ece0c0'};return m[t]||'#e0e0e0'}
 </script>
 
 <style scoped>

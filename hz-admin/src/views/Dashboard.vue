@@ -6,7 +6,7 @@
     </div>
 
     <el-row :gutter="20" class="stat-row">
-      <el-col :span="6" v-for="(card, i) in statCards" :key="i">
+      <el-col :span="8" v-for="(card, i) in statCards" :key="i">
         <div class="stat-card" :style="{ background: card.gradient }">
           <div class="stat-icon"><el-icon :size="26"><component :is="card.icon" /></el-icon></div>
           <div class="stat-info">
@@ -37,28 +37,29 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import * as echarts from 'echarts'
-import { User, Service, ChatSquare, DataLine, Picture, Star, Collection, Clock } from '@element-plus/icons-vue'
+import { User, Service, Share, ChatSquare, DataLine, Picture, Star, Collection, Clock } from '@element-plus/icons-vue'
 import request from '../utils/request'
 
 const pieChart = ref(null), barChart = ref(null)
 let pieInst = null, barInst = null
 
 const statCards = ref([
-  { label: '用户总数', value: 0, icon: User, gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
-  { label: '求助帖', value: 0, icon: Service, gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
-  { label: '树洞', value: 0, icon: ChatSquare, gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' },
-  { label: '失物招领', value: 0, icon: Picture, gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' },
-  { label: '校友圈', value: 0, icon: DataLine, gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)' },
-  { label: '点赞', value: 0, icon: Star, gradient: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)' },
-  { label: '评论', value: 0, icon: Clock, gradient: 'linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)' },
-  { label: '收藏', value: 0, icon: Collection, gradient: 'linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)' }
+  { label: '用户总数', value: 0, icon: User, gradient: 'linear-gradient(135deg, #a8b8e0 0%, #b8a8d8 100%)' },
+  { label: '求助', value: 0, icon: Service, gradient: 'linear-gradient(135deg, #f0b0c0 0%, #e8989b 100%)' },
+  { label: '帮忙', value: 0, icon: Share, gradient: 'linear-gradient(135deg, #f0c898 0%, #e0b878 100%)' },
+  { label: '树洞', value: 0, icon: ChatSquare, gradient: 'linear-gradient(135deg, #8ec8e8 0%, #70d8e0 100%)' },
+  { label: '失物招领', value: 0, icon: Picture, gradient: 'linear-gradient(135deg, #80d0a8 0%, #70d8c8 100%)' },
+  { label: '校友圈', value: 0, icon: DataLine, gradient: 'linear-gradient(135deg, #e8b0b8 0%, #e0d080 100%)' },
+  { label: '点赞', value: 0, icon: Star, gradient: 'linear-gradient(135deg, #c8b8d8 0%, #e8c8e0 100%)' },
+  { label: '评论', value: 0, icon: Clock, gradient: 'linear-gradient(135deg, #e8c8a0 0%, #d0a8d8 100%)' },
+  { label: '收藏', value: 0, icon: Collection, gradient: 'linear-gradient(135deg, #d8c8e8 0%, #b0c8e8 100%)' }
 ])
 
 onMounted(async () => {
   try {
     const res = await request.get('/dashboard/stats')
     const d = res.data
-    const keys = ['totalUsers','totalHelps','totalHoles','totalLosts','totalDynamics','totalLikes','totalComments','totalCollections']
+    const keys = ['totalUsers','totalHelps','totalHelpOffers','totalHoles','totalLosts','totalDynamics','totalLikes','totalComments','totalCollections']
     statCards.value.forEach((c, i) => c.value = d[keys[i]] || 0)
     await nextTick(); initCharts(d)
   } catch (_) {}
@@ -75,10 +76,10 @@ function initCharts(d) {
       label: { show: false },
       emphasis: { label: { show: true, fontSize: 15, fontWeight: 'bold' } },
       data: [
-        { value: d.totalHelps||0, name: '求助帖', itemStyle: { color: '#f5576c' } },
-        { value: d.totalHoles||0, name: '树洞', itemStyle: { color: '#00f2fe' } },
-        { value: d.totalLosts||0, name: '失物招领', itemStyle: { color: '#38f9d7' } },
-        { value: d.totalDynamics||0, name: '校友圈', itemStyle: { color: '#fee140' } }
+        { value: d.totalHelps||0, name: '求助帖', itemStyle: { color: '#e8989b' } },
+        { value: d.totalHoles||0, name: '树洞', itemStyle: { color: '#70d8e0' } },
+        { value: d.totalLosts||0, name: '失物招领', itemStyle: { color: '#70d8c8' } },
+        { value: d.totalDynamics||0, name: '校友圈', itemStyle: { color: '#e0d080' } }
       ]
     }]
   })
@@ -87,20 +88,21 @@ function initCharts(d) {
   barInst.setOption({
     tooltip: { trigger: 'axis' },
     grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-    xAxis: { type: 'category', data: ['用户','求助','树洞','失物','校友圈','点赞','评论','收藏'] },
+    xAxis: { type: 'category', data: ['用户','求助','帮忙','树洞','失物','校友圈','点赞','评论','收藏'] },
     yAxis: { type: 'value' },
     series: [{
       type: 'bar', barWidth: '45%',
       itemStyle: { borderRadius: 6 },
       data: [
-        { value: d.totalUsers||0, itemStyle: { color: '#667eea' } },
-        { value: d.totalHelps||0, itemStyle: { color: '#f5576c' } },
-        { value: d.totalHoles||0, itemStyle: { color: '#00f2fe' } },
-        { value: d.totalLosts||0, itemStyle: { color: '#38f9d7' } },
-        { value: d.totalDynamics||0, itemStyle: { color: '#fee140' } },
-        { value: d.totalLikes||0, itemStyle: { color: '#a18cd1' } },
-        { value: d.totalComments||0, itemStyle: { color: '#d57eeb' } },
-        { value: d.totalCollections||0, itemStyle: { color: '#8ec5fc' } }
+        { value: d.totalUsers||0, itemStyle: { color: '#a8b8e0' } },
+        { value: d.totalHelps||0, itemStyle: { color: '#e8989b' } },
+        { value: d.totalHelpOffers||0, itemStyle: { color: '#e0b878' } },
+        { value: d.totalHoles||0, itemStyle: { color: '#70d8e0' } },
+        { value: d.totalLosts||0, itemStyle: { color: '#70d8c8' } },
+        { value: d.totalDynamics||0, itemStyle: { color: '#e0d080' } },
+        { value: d.totalLikes||0, itemStyle: { color: '#c8b8d8' } },
+        { value: d.totalComments||0, itemStyle: { color: '#d0a8d8' } },
+        { value: d.totalCollections||0, itemStyle: { color: '#b0c8e8' } }
       ]
     }]
   })

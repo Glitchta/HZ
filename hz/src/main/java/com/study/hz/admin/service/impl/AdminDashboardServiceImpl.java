@@ -18,6 +18,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         DashboardStatsDto dto = new DashboardStatsDto();
         dto.setTotalUsers(adminDashboardMapper.countUsers());
         dto.setTotalHelps(adminDashboardMapper.countHelps());
+        dto.setTotalHelpOffers(adminDashboardMapper.countHelpOffers());
         dto.setTotalHoles(adminDashboardMapper.countHoles());
         dto.setTotalLosts(adminDashboardMapper.countLosts());
         dto.setTotalDynamics(adminDashboardMapper.countDynamics());

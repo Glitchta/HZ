@@ -14,8 +14,9 @@ const routes = [
       { path: '', redirect: '/dashboard' },
       { path: 'dashboard', name: 'Dashboard', component: () => import('../views/Dashboard.vue'), meta: { title: '仪表盘' } },
       { path: 'users', name: 'Users', component: () => import('../views/user/UserList.vue'), meta: { title: '用户管理' } },
-      { path: 'contents', name: 'Contents', component: () => import('../views/content/ContentList.vue'), meta: { title: '内容管理' } },
-      { path: 'comments', name: 'Comments', component: () => import('../views/comment/CommentList.vue'), meta: { title: '评论管理' } }
+      { path: 'contents/:type?', name: 'Contents', component: () => import('../views/content/ContentList.vue'), meta: { title: '内容管理' } },
+      { path: 'comments', name: 'Comments', component: () => import('../views/comment/CommentList.vue'), meta: { title: '评论管理' } },
+      { path: 'announcements', name: 'Announcements', component: () => import('../views/announcement/AnnouncementList.vue'), meta: { title: '公告管理' } }
     ]
   }
 ]

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class DashboardStatsDto {
     private Long totalUsers;
     private Long totalHelps;
+    private Long totalHelpOffers;
     private Long totalHoles;
     private Long totalLosts;
     private Long totalDynamics;

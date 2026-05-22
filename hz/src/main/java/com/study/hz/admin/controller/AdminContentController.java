@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/admin/api")
 public class AdminContentController {
 
-    private static final List<String> ALL_TYPES = Arrays.asList("help", "hole", "lost", "dynamic");
+    private static final List<String> ALL_TYPES = Arrays.asList("help_ask", "help_offer", "hole", "lost", "dynamic");
 
     @Autowired
     private AdminDashboardMapper adminDashboardMapper;
@@ -51,7 +51,8 @@ public class AdminContentController {
     @GetMapping("/content/{contentType}/{id}")
     public Result getContentDetail(@PathVariable String contentType, @PathVariable Long id) {
         switch (contentType.toLowerCase()) {
-            case "help":
+            case "help_ask":
+            case "help_offer":
                 return helpService.detailHelp(id);
             case "hole":
                 return holeService.getById(id);
@@ -79,7 +80,8 @@ public class AdminContentController {
         // 3. 删除内容本身
         boolean removed = false;
         switch (contentType.toLowerCase()) {
-            case "help":
+            case "help_ask":
+            case "help_offer":
                 removed = helpService.removeById(id);
                 break;
             case "hole":

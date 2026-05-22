@@ -14,13 +14,25 @@
           <el-icon><User /></el-icon>
           <span>用户管理</span>
         </el-menu-item>
-        <el-menu-item index="/contents">
-          <el-icon><Document /></el-icon>
-          <span>内容管理</span>
-        </el-menu-item>
+        <el-sub-menu index="/contents">
+          <template #title>
+            <el-icon><Document /></el-icon>
+            <span>内容管理</span>
+          </template>
+          <el-menu-item index="/contents"><span>全部内容</span></el-menu-item>
+          <el-menu-item index="/contents/help_ask"><span>求助</span></el-menu-item>
+          <el-menu-item index="/contents/help_offer"><span>帮忙</span></el-menu-item>
+          <el-menu-item index="/contents/hole"><span>树洞</span></el-menu-item>
+          <el-menu-item index="/contents/lost"><span>失物招领</span></el-menu-item>
+          <el-menu-item index="/contents/dynamic"><span>校友圈</span></el-menu-item>
+        </el-sub-menu>
         <el-menu-item index="/comments">
           <el-icon><ChatDotRound /></el-icon>
           <span>评论管理</span>
+        </el-menu-item>
+        <el-menu-item index="/announcements">
+          <el-icon><Bell /></el-icon>
+          <span>公告管理</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
@@ -53,7 +65,7 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import { DataAnalysis, User, Document, ChatDotRound, School } from '@element-plus/icons-vue'
+import { DataAnalysis, User, Document, ChatDotRound, Bell, School } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -64,6 +76,7 @@ const activeMenu = computed(() => {
   if (p.startsWith('/users')) return '/users'
   if (p.startsWith('/contents')) return '/contents'
   if (p.startsWith('/comments')) return '/comments'
+  if (p.startsWith('/announcements')) return '/announcements'
   return '/dashboard'
 })
 const username = computed(() => localStorage.getItem('admin_username') || '')
@@ -84,6 +97,8 @@ function handleLogout() { auth.logout(); router.replace('/login') }
 }
 .side-menu :deep(.el-menu-item:hover) { background: #f0f5ff !important; color: #409EFF !important; }
 .side-menu :deep(.el-menu-item.is-active) { background: #e6f4ff !important; color: #1677ff !important; font-weight: 600; }
+.side-menu :deep(.el-sub-menu .el-menu-item) { padding-left: 56px !important; height: 36px; line-height: 36px; font-size: 13px; }
+.side-menu :deep(.el-sub-menu .el-menu-item.is-active) { background: #e6f4ff !important; color: #1677ff !important; }
 
 .main-area { background: #f5f7fa; }
 .topbar { height: 52px; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: 0 1px 4px rgba(0,0,0,.04); z-index: 10; }

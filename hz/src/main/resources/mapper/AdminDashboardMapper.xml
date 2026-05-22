@@ -9,7 +9,11 @@
     </select>
 
     <select id="countHelps" resultType="java.lang.Long">
-        select count(*) from help
+        select count(*) from help where Type = '求助'
+    </select>
+
+    <select id="countHelpOffers" resultType="java.lang.Long">
+        select count(*) from help where Type = '帮忙'
     </select>
 
     <select id="countHoles" resultType="java.lang.Long">
@@ -38,13 +42,24 @@
 
     <select id="selectContentList" resultType="com.study.hz.admin.dto.AdminContentVo">
         <foreach collection="typeList" item="t" separator=" UNION ALL ">
-            <if test="t == 'help'">
-                select h.id, 'HELP' as type, h.create_user as createUser, ui.nickname,
+            <if test="t == 'help_ask'">
+                select h.id, 'HELP_ASK' as type, h.create_user as createUser, ui.nickname,
                        h.title, h.description, IFNULL(h.comment_count, 0) as commentCount,
                        IFNULL(h.like_count, 0) as likeCount, h.create_time as createTime
                 from help h
                 left join user_info ui on h.create_user = ui.user_id
-                where 1=1
+                where h.Type = '求助'
+                <if test="keyword != null and keyword != ''">
+                    and (h.title like concat('%', #{keyword}, '%') or h.description like concat('%', #{keyword}, '%'))
+                </if>
+            </if>
+            <if test="t == 'help_offer'">
+                select h.id, 'HELP_OFFER' as type, h.create_user as createUser, ui.nickname,
+                       h.title, h.description, IFNULL(h.comment_count, 0) as commentCount,
+                       IFNULL(h.like_count, 0) as likeCount, h.create_time as createTime
+                from help h
+                left join user_info ui on h.create_user = ui.user_id
+                where h.Type = '帮忙'
                 <if test="keyword != null and keyword != ''">
                     and (h.title like concat('%', #{keyword}, '%') or h.description like concat('%', #{keyword}, '%'))
                 </if>
